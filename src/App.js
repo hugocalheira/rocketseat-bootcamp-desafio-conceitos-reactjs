@@ -8,7 +8,13 @@ function App() {
   const [repositories, setRepositories] = useState([])
 
   async function handleAddRepository() {
-    // TODO
+    const repository = {
+      title: `Projeto ${Date.now()}`,
+      techs: ['React','Python','ActionScript 3'],
+      owner: 'Hugo'
+    }
+    const response = await api.post('/repositories', repository)
+    setRepositories([ ...repositories, response.data])
   }
 
   async function handleRemoveRepository(id) {
