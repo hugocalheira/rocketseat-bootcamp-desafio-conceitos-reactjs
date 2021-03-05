@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "./services/api";
 
 import "./styles.css";
 
 function App() {
+
+  const [repositories, setRepositories] = useState([])
+
   async function handleAddRepository() {
     // TODO
   }
@@ -10,6 +14,21 @@ function App() {
   async function handleRemoveRepository(id) {
     // TODO
   }
+
+  async function getRepositories() {
+    try {
+      const response = await api.get('/repositories')
+      if (response.status === 200) {
+        setRepositories(response.data)
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  useEffect(() => {
+    getRepositories()
+  },[])
 
   return (
     <div>
